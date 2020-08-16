@@ -60,7 +60,7 @@ public class CovidStats extends Fragment {
     ArrayList<BarEntry> lastTenDailyCases = new ArrayList<>();
     ArrayList<Entry> lastTenDailyDeaths = new ArrayList<>();
 
-
+String na="";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
