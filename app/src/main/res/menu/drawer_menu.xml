@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_stat"
+            android:icon="@drawable/ic_stats"
+            android:title="COVID-19 Statistics" />
+        <item
+            android:id="@+id/nav_mail"
+            android:icon="@drawable/ic_warning_black_24dp"
+            android:title="Report COVID Patient" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_directions_black_24dp"
+            android:title="Navigate to the nearest Hospital" />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_email"
+            android:title="Message to friend" />
+    </group>
+    <item android:title="Options">
+        <menu>
+
+            <item
+                android:id="@+id/accountSettings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="Account Settings" />
+            <item
+                android:id="@+id/allUsers"
+                android:icon="@drawable/ic_account_circle_black_24dp"
+                android:title="All Users" />
+            <item
+                android:id="@+id/contact"
+                android:icon="@drawable/ic_phone"
+                android:title="Contact Us" />
+            <item
+                android:id="@+id/nav_share"
+                android:title="Share Application"
+                android:icon="@drawable/ic_share_black_24dp"/>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_log_out"
+                android:title="Log Out" />
+    >
+
+
+
+
+        </menu>
+
+
+    </item>
+</menu>

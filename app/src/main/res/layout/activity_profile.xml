@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/txt_profileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:text="TextView"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/txt_profileStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:text="TextView"
+        android:textSize="25dp" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/pro_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="212dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_account_circle_black_24dp" />
+
+
+    <Button
+        android:id="@+id/btn_frndRequest"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:background="@color/main_green_stroke_color"
+        android:text="Send Friend Request" />
+
+    <Button
+        android:id="@+id/btn_decline"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450dp"
+        android:background="@color/custom_float_bg"
+        android:text="Decline Request" />
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/design_default_color_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <AutoCompleteTextView
+            android:id="@+id/txt_countries"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:completionThreshold="1"
+            android:gravity="center"
+            android:hint="Search your Country" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Overall summary"
+            android:textSize="22dp" />
+
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/SumChart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"></com.github.mikephil.charting.charts.PieChart>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Last 10 days new cases"
+            android:textSize="22dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/dailyBarChart"
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Last 10 days Deaths"
+            android:textSize="22dp" />
+
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            android:id="@+id/lineChart"
+
+            />
+    </LinearLayout>
+</ScrollView>

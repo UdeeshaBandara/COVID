@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.New" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">true</item>
+
+
+    </style>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+    <style name="Msg.NoActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="color">@color/gray_btn_bg_color</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+
+
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatActivity">
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/message_swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="676dp"
+
+        android:layout_above="@+id/chat_message_view"
+        android:layout_marginBottom="6dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messeges_list"
+            android:layout_width="match_parent"
+            android:layout_height="630dp"
+            android:layout_above="@+id/chat_message_view" />
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <EditText
+        android:id="@+id/chat_message_view"
+        android:layout_width="330dp"
+        android:layout_height="49dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_weight="8"
+        android:hint="Enter your message"></EditText>
+
+    <ImageButton
+        android:id="@+id/chat_send_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/new_send_black_24dp" />
+
+</RelativeLayout>
