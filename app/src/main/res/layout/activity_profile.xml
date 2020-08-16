@@ -5,6 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bgHeader2"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/header_register"
+        android:elevation="5dp"
+
+        /> <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bgHeader1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/header_login"
+        android:elevation="5dp"
+
+         />
 
     <TextView
         android:id="@+id/txt_profileName"
@@ -27,12 +46,21 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/pro_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="212dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ic_account_circle_black_24dp" />
+        android:layout_width="151dp"
+        android:layout_height="150dp"
 
+
+        android:layout_below="@+id/bgHeader2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        android:src="@drawable/ic_account_circle_black_24dp" />
 
     <Button
         android:id="@+id/btn_frndRequest"
@@ -40,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
-        android:background="@color/main_green_stroke_color"
+        android:background="@drawable/background_ok"
         android:text="Send Friend Request" />
 
     <Button
@@ -49,6 +77,17 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="450dp"
-        android:background="@color/custom_float_bg"
+
+        android:background="@drawable/background"
         android:text="Decline Request" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bgHeader"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-1dp"
+        android:background="@drawable/header_login"
+        android:elevation="5dp"
+        android:rotation="180" />
 </RelativeLayout>

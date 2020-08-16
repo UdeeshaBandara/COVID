@@ -6,6 +6,17 @@
     android:layout_height="wrap_content"
     android:background="@color/nibm_logo_background">
 
+<androidx.cardview.widget.CardView
+    android:layout_width="wrap_content"
+    android:layout_height="90dp"
+    app:cardCornerRadius="22dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginBottom="12dp"
+app:cardBackgroundColor="#983CFF"
+    android:padding="6dp">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_single_image"
         android:layout_width="99dp"
@@ -62,5 +73,5 @@
         android:layout_marginTop="26dp"
         android:visibility="invisible"
         app:srcCompat="@drawable/success_bow" />
-
+</androidx.cardview.widget.CardView>
 </RelativeLayout>

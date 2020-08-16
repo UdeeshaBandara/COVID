@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText txt_name, txt_email, txt_password,txt_reEnter;
-    private Button btn_register;
+    private Button btn_register,btn_back;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
     private DatabaseReference firebaseDatabase;
@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         txt_password = findViewById(R.id.txt_password);
         btn_register = findViewById(R.id.btn_register);
         txt_reEnter=findViewById(R.id.txt_reEnter);
+        btn_back=findViewById(R.id.btn_back);
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +58,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                finish();
+            }
+        });
+
     }
 
     private void register_user(String toString, String email, String password) {

@@ -2,189 +2,223 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:id="@+id/layout1"
     android:layout_width="match_parent"
 
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/tel"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="134dp"
+        android:layout_height="134dp"
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/name"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
+        android:layout_marginStart="312dp"
+
+        android:layout_marginLeft="312dp"
+        android:src="@drawable/circletransparant"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="@string/add"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="134dp"
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="@string/age"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:layout_height="134dp"
+        android:layout_marginEnd="332dp"
+        android:layout_marginRight="332dp"
+        android:src="@drawable/circletransparant"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-23dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+
+        android:layout_marginStart="350dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
         android:text="@string/symptoms"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_tel" />
 
-    <CheckBox
-        android:id="@+id/chk_fever"
-        android:layout_width="wrap_content"
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat2"
+        android:layout_width="414dp"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/fever"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/chk_cough"
-        app:layout_constraintTop_toBottomOf="@+id/chk_headache" />
 
-    <CheckBox
-        android:id="@+id/chk_tiredness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/tiredness"
-        android:textSize="14sp"
+        android:layout_marginTop="56dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chk_headache" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_tel">
 
-    <CheckBox
-        android:id="@+id/chk_cough"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/cough"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/chk_tiredness"
-        app:layout_constraintTop_toBottomOf="@+id/chk_headache" />
+        <CheckBox
+            android:id="@+id/chk_aches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:hint="@string/achesAndPains"
+            android:textSize="14sp" />
 
-    <CheckBox
-        android:id="@+id/chk_aches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/achesAndPains"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/chk_soreThroat"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        <CheckBox
+            android:id="@+id/chk_tiredness"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
 
-    <CheckBox
-        android:id="@+id/chk_headache"
-        android:layout_width="wrap_content"
+
+            android:hint="@string/tiredness"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/chk_cough"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:hint="@string/cough"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="412dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/headache"
-        android:textSize="14sp"
+        android:layout_marginBottom="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+        app:layout_constraintVertical_bias="0.177">
 
-    <CheckBox
-        android:id="@+id/chk_soreThroat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/soreThroat"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/chk_headache"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        tools:ignore="MissingConstraints" />
+
+        <CheckBox
+            android:id="@+id/chk_fever"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="22dp"
+
+            android:hint="@string/fever"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/chk_headache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="66dp"
+            android:hint="@string/headache"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/chk_soreThroat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:hint="@string/soreThroat"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/txt_age"
-        android:inputType="number"
-        android:layout_width="159dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
+        android:background="@drawable/custom_input"
         android:ems="10"
-
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/txt_add" />
+        android:focusable="true"
+        android:hint="Patient Age"
+        android:inputType="number"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_add" />
 
     <EditText
         android:id="@+id/txt_name"
-        android:layout_width="159dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_width="240dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
+        android:background="@drawable/custom_input"
         android:ems="10"
+
+        android:hint="Patient Name"
         android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txt_add"
-        android:layout_width="159dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:ems="10"
+        android:background="@drawable/custom_input"
+        android:hint="Patient Address"
         android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/txt_name" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
 
     <EditText
         android:id="@+id/txt_tel"
-        android:inputType="number"
-        android:layout_width="159dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
         android:ems="10"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/txt_age" />
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:hint="Patient Telephone No"
+        android:background="@drawable/custom_input"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_age" />
 
     <Button
         android:id="@+id/btn_report"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="68dp"
         android:layout_marginLeft="68dp"
         android:layout_marginBottom="92dp"
+        android:background="@drawable/background"
         android:text="@string/report"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -196,10 +230,21 @@
         android:layout_marginStart="112dp"
         android:layout_marginLeft="112dp"
         android:layout_marginBottom="92dp"
+        android:background="@drawable/background_ok"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_report" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bgHeader"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/header_login"
+        android:elevation="5dp"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="36dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

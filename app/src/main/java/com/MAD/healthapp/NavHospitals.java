@@ -24,6 +24,11 @@ import com.google.android.gms.location.LocationListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -61,11 +66,14 @@ import java.util.List;
 
 public class NavHospitals extends FragmentActivity implements OnMapReadyCallback {
 
-    private String calculatedDestination="";
+    //private String calculatedDestination="";
     LatLng current_position;
+    Spinner txt_hospitals;
+    String hospitalsWithLan[][]=new String[2][200];
     private GoogleMap mMap;
     private static final int LOCATION_REQUEST = 500;
     ArrayList<LatLng> listPoints;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +83,38 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         listPoints = new ArrayList<>();
+        txt_hospitals=findViewById(R.id.txt_hospitals);
+        String []it=new String[3];
+        it[0]="udi";it[1]="indu";
+        ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,it);
+        Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        txt_hospitals.setAdapter(Adaptor);
+        txt_hospitals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //getSum(String.valueOf(parent.getItemAtPosition(position)));
+                for (int d = 0; d < hospitalsWithLan[0].length; d++) {
+                    if (parent.getItemAtPosition(position).equals(hospitalsWithLan[0][d])) {
+                        //   getDailyUpdate(countries[1][d]);
+                        String[] latlong =  hospitalsWithLan[1][d].split(",");
+                        double lat=Double.parseDouble(latlong[0]);
+                        double lng=Double.parseDouble(latlong[1]);
+                        LatLng location = new LatLng(lat, lng);
+                        String url = getRequestUrl(location, listPoints.get(0));
+
+                        TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
+                        taskRequestDirections.execute(url);
+
+                    }
+
+                }
+            }
+        });
+
+
     }
 
 
@@ -112,6 +152,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
 
 
             }
+
         });
 
     }
@@ -120,6 +161,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
     {
         String mLatLong = current_position.latitude + "," + current_position.longitude;
         String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+mLatLong+"&radius=5000&types=hospital&key=AIzaSyAPrTPADT_tYmMJYjg6nZZ4jUHLJILoWpM";
+       Log.e("lat",mLatLong);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -128,19 +170,22 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                 try {
 
                     JSONObject hospital = new JSONObject(response);
-                    double lat=Double.parseDouble(hospital.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getString("lat"));
-                    double lng=Double.parseDouble(hospital.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getString("lng"));
-                    Log.e("lat",String.valueOf(lat));
-                    LatLng location = new LatLng(lat, lng);
-                    String url = getRequestUrl(location, listPoints.get(0));
+           //         double lat=Double.parseDouble(hospital.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getString("lat"));
+             //       double lng=Double.parseDouble(hospital.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getString("lng"));
+                    for (int i = 0; i < hospital.length(); i++) {
+                        hospitalsWithLan[1][i] = hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lat")+","+
+                        hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lng");
+                        hospitalsWithLan[0][i] = hospital.getJSONArray("results").getJSONObject(i).getString("name");
 
-                    TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
-                    taskRequestDirections.execute(url);
+                    }
 
-
-                    //ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, countries[0]);
-                    //Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    // txt_countries.setAdapter(Adaptor);
+                Log.e("array",hospitalsWithLan[0][0]);
+                   // txt_hospitals.setText("hi");
+                  //  ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                    //        (getBaseContext(), android.R.layout.select_dialog_item, hospitalsWithLan[0]);
+                   ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1,hospitalsWithLan[0]);
+                   Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                   txt_hospitals.setAdapter(Adaptor);
 
 
                 } catch (Exception ex) {

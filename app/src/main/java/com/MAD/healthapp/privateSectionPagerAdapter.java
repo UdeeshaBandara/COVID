@@ -15,11 +15,11 @@ class privateSectionPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-                RequestFragment requestFragment=new RequestFragment();
-                return  requestFragment;
+                FriendsFragment friendsFragment1=new FriendsFragment();
+                return  friendsFragment1;
             case 1:
-                ChatsFragment chatsFragment=new ChatsFragment();
-                return  chatsFragment;
+                FriendsFragment friendsFragment2=new FriendsFragment();
+                return  friendsFragment2;
             case 2:
                 FriendsFragment friendsFragment=new FriendsFragment();
                 return  friendsFragment;

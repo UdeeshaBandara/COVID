@@ -21,10 +21,10 @@
         android:layout_marginTop="0dp"
         android:text="TextView"
         android:textSize="16dp"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp"
-        android:paddingLeft="1dp"
-        android:paddingRight="1dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
         />
 
     <TextView
