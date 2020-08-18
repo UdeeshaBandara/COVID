@@ -24,7 +24,7 @@
         android:layout_width="187dp"
         android:layout_height="38dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="480dp"
         android:background="@drawable/background_ok"
         android:text="@string/need_a_new_account"
         android:textColor="@color/sweet_dialog_bg_color_dark"
@@ -40,10 +40,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="190dp"
         android:ems="10"
+        android:drawablePadding="12dp"
         android:background="@drawable/custom_input"
         android:hint="Enter Email"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        android:drawableStart="@drawable/custom_email_icon"
+        android:drawableLeft="@drawable/custom_email_icon" />
 
     <EditText
 
@@ -52,14 +55,17 @@
         android:layout_height="39dp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        android:drawablePadding="12dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="255dp"
         android:ems="10"
+        android:drawableStart="@drawable/custom_lock_icon"
         android:background="@drawable/custom_input"
         android:hint="Password"
         android:inputType="textPassword"
 
-        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_email"
+        android:drawableLeft="@drawable/custom_lock_icon" />
 
     <Button
         android:paddingStart="12dp"

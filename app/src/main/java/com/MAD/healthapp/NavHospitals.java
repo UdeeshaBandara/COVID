@@ -69,36 +69,35 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
     //private String calculatedDestination="";
     LatLng current_position;
     Spinner txt_hospitals;
-    String hospitalsWithLan[][]=new String[2][200];
+    String hospitalsWithLan[][];
+
     private GoogleMap mMap;
     private static final int LOCATION_REQUEST = 500;
     ArrayList<LatLng> listPoints;
+    SupportMapFragment mapFragment;
+    MarkerOptions markerOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_hospitals);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         listPoints = new ArrayList<>();
-        txt_hospitals=findViewById(R.id.txt_hospitals);
-        String []it=new String[3];
-        it[0]="udi";it[1]="indu";
-        ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,it);
-        Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        txt_hospitals.setAdapter(Adaptor);
-        txt_hospitals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        View view = findViewById(R.id.nested_linear);
+        txt_hospitals=view.findViewById(R.id.txt_hospitals);
 
-
+      txt_hospitals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //getSum(String.valueOf(parent.getItemAtPosition(position)));
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               if(!hospitalsWithLan[0][0].isEmpty())
+                {
                 for (int d = 0; d < hospitalsWithLan[0].length; d++) {
                     if (parent.getItemAtPosition(position).equals(hospitalsWithLan[0][d])) {
-                        //   getDailyUpdate(countries[1][d]);
+                        mMap.clear();
+                        mMap.addMarker(markerOptions);
                         String[] latlong =  hospitalsWithLan[1][d].split(",");
                         double lat=Double.parseDouble(latlong[0]);
                         double lng=Double.parseDouble(latlong[1]);
@@ -111,8 +110,15 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                     }
 
                 }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
+
 
 
     }
@@ -128,10 +134,11 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
+
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-                //Reset marker when already 2
+                //Reset marker when already 1
                 if (listPoints.size() == 1) {
                     listPoints.clear();
                     mMap.clear();
@@ -139,7 +146,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                 //Save first point select
                 listPoints.add(latLng);
                 //Create marker
-                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
 
 
@@ -170,22 +177,21 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                 try {
 
                     JSONObject hospital = new JSONObject(response);
-           //         double lat=Double.parseDouble(hospital.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getString("lat"));
-             //       double lng=Double.parseDouble(hospital.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getString("lng"));
-                    for (int i = 0; i < hospital.length(); i++) {
+                   hospitalsWithLan= new String[2][hospital.length()];
+
+                     for (int i = 0; i < hospital.length(); i++) {
+                     //    if(!hospital.getJSONArray("results").getJSONObject(i).getString("name").contains("Best")){
                         hospitalsWithLan[1][i] = hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lat")+","+
                         hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lng");
-                        hospitalsWithLan[0][i] = hospital.getJSONArray("results").getJSONObject(i).getString("name");
+                        hospitalsWithLan[0][i] = hospital.getJSONArray("results").getJSONObject(i).getString("name");}
 
-                    }
+                    //}
 
-                Log.e("array",hospitalsWithLan[0][0]);
-                   // txt_hospitals.setText("hi");
-                  //  ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                    //        (getBaseContext(), android.R.layout.select_dialog_item, hospitalsWithLan[0]);
-                   ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1,hospitalsWithLan[0]);
+
+
+                 ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(mapFragment.getActivity(),android.R.layout.simple_list_item_1,hospitalsWithLan[0]);
                    Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                   txt_hospitals.setAdapter(Adaptor);
+                  txt_hospitals.setAdapter(Adaptor);
 
 
                 } catch (Exception ex) {
@@ -303,7 +309,9 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
             try {
                 jsonObject = new JSONObject(strings[0]);
                 DirectionsParser directionsParser = new DirectionsParser();
+
                 routes = directionsParser.parse(jsonObject);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -316,7 +324,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
 
             ArrayList points = null;
 
-            PolylineOptions polylineOptions = null;
+            PolylineOptions polylineOptions = new PolylineOptions();
 
             for (List<HashMap<String, String>> path : lists) {
                 points = new ArrayList();
@@ -336,7 +344,10 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
             }
 
             if (polylineOptions!=null) {
+
                 mMap.addPolyline(polylineOptions);
+
+
             } else {
                 Toast.makeText(getApplicationContext(), "Direction not found!", Toast.LENGTH_SHORT).show();
             }

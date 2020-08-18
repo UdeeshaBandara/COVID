@@ -14,7 +14,7 @@
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_directions_black_24dp"
-            android:title="Navigate to the nearest Hospital" />
+            android:title="Navigate to the Nearest Hospital" />
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_email"

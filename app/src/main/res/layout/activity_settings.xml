@@ -22,43 +22,49 @@
         android:src="@drawable/circletransparant" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="134dp"
-        android:layout_height="134dp"
+        android:layout_width="136dp"
+        android:layout_height="149dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="275dp"
-        android:layout_marginLeft="275dp"
+        android:layout_marginStart="299dp"
+        android:layout_marginLeft="299dp"
         android:layout_marginTop="-58dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginRight="-24dp"
         android:src="@drawable/circletransparant" />
 
     <ImageView
         android:id="@+id/circle3"
-        android:layout_width="182dp"
-        android:layout_height="182dp"
+        android:layout_width="wrap_content"
+        android:layout_height="156dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="-79dp"
-        android:layout_marginBottom="577dp"
+        android:layout_marginStart="340dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginEnd="-65dp"
+        android:layout_marginRight="-65dp"
+        android:layout_marginBottom="541dp"
         android:src="@drawable/circle" />
 
     <ImageView
         android:id="@+id/circle1"
-        android:layout_width="87dp"
-        android:layout_height="88dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="71dp"
+        android:layout_height="72dp"
+
         android:layout_alignParentRight="true"
-        android:layout_marginTop="-11dp"
-        android:layout_marginRight="295dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="316dp"
         android:layout_marginBottom="659dp"
         android:src="@drawable/circle" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_dp"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:src="@mipmap/nibm_logo">
