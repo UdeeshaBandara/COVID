@@ -45,17 +45,16 @@ public class FriendsFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mMainView=inflater.inflate(R.layout.fragment_friends,container,false);
-        mFriendsList=mMainView.findViewById(R.id.friend_list);
-        mAuth=FirebaseAuth.getInstance();
-        mCurrent_user_id=mAuth.getCurrentUser().getUid();
-        mFriendsDatabase= FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
+        mMainView = inflater.inflate(R.layout.fragment_friends, container, false);
+        mFriendsList = mMainView.findViewById(R.id.friend_list);
+        mAuth = FirebaseAuth.getInstance();
+        mCurrent_user_id = mAuth.getCurrentUser().getUid();
+        mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
-        mUsersDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mFriendsList.setHasFixedSize(true);
         mFriendsList.setLayoutManager(new LinearLayoutManager(getContext()));
         return mMainView;
@@ -66,7 +65,7 @@ public class FriendsFragment extends Fragment {
         super.onStart();
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUserRef.child("online").setValue("true");
-        FirebaseRecyclerAdapter<Friends,FriendsViewHolder> friendsRecyclerViewAdapter=new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(
+        FirebaseRecyclerAdapter<Friends, FriendsViewHolder> friendsRecyclerViewAdapter = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(
                 Friends.class,
                 R.layout.users_single_layout,
                 FriendsViewHolder.class,
@@ -76,48 +75,44 @@ public class FriendsFragment extends Fragment {
             @Override
             protected void populateViewHolder(FriendsViewHolder friendsViewHolder, Friends friends, int i) {
                 friendsViewHolder.setDate(friends.getDate());
-                String list_user_id=getRef(i).getKey();
+                String list_user_id = getRef(i).getKey();
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String userName=dataSnapshot.child("Name").getValue().toString();
-                        String userImage=dataSnapshot.child("Image").getValue().toString();
-                        if(dataSnapshot.hasChild("online"))
-                        {
-                            String userOnline=dataSnapshot.child("online").getValue().toString();
+                        String userName = dataSnapshot.child("Name").getValue().toString();
+                        String userImage = dataSnapshot.child("Image").getValue().toString();
+                        if (dataSnapshot.hasChild("online")) {
+                            String userOnline = dataSnapshot.child("online").getValue().toString();
                             friendsViewHolder.setUserOnline(userOnline);
 
                         }
 
                         friendsViewHolder.setName(userName);
 
-                       friendsViewHolder.setUserImage(userImage,getContext());
+                        friendsViewHolder.setUserImage(userImage, getContext());
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                CharSequence options[]=new CharSequence[]{"Open Profile","Send Message"};
-                                AlertDialog.Builder al=new AlertDialog.Builder(getContext());
+                                CharSequence options[] = new CharSequence[]{"Open Profile", "Send Message"};
+                                AlertDialog.Builder al = new AlertDialog.Builder(getContext());
                                 al.setTitle("Select Options");
                                 al.setItems(options, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                            if(which==0)
-                            {
-                                Intent profile=new Intent(getContext(),ProfileActivity.class);
-                                profile.putExtra("userid",list_user_id);
+                                        if (which == 0) {
+                                            Intent profile = new Intent(getContext(), ProfileActivity.class);
+                                            profile.putExtra("userid", list_user_id);
 
-                                startActivity(profile);
+                                            startActivity(profile);
 
-                            }
-                            else if(which==1)
-                            {
-                                Intent chat=new Intent(getContext(),ChatActivity.class);
-                                chat.putExtra("userid",list_user_id);
-                                chat.putExtra("user_name",userName);
-                                startActivity(chat);
+                                        } else if (which == 1) {
+                                            Intent chat = new Intent(getContext(), ChatActivity.class);
+                                            chat.putExtra("userid", list_user_id);
+                                            chat.putExtra("user_name", userName);
+                                            startActivity(chat);
 
-                            }
+                                        }
                                     }
                                 });
                                 al.show();
@@ -134,46 +129,43 @@ public class FriendsFragment extends Fragment {
         };
         mFriendsList.setAdapter(friendsRecyclerViewAdapter);
     }
-    public static class FriendsViewHolder extends RecyclerView.ViewHolder
 
-    {
+    public static class FriendsViewHolder extends RecyclerView.ViewHolder {
 
         View mView;
+
         public FriendsViewHolder(@NonNull View itemView) {
             super(itemView);
-            mView=itemView;
+            mView = itemView;
         }
-        public void setDate(String date)
-        {
 
-            TextView userStatusView=mView.findViewById(R.id.single_status);
+        public void setDate(String date) {
+
+            TextView userStatusView = mView.findViewById(R.id.single_status);
             userStatusView.setText(date);
         }
-        public void setName(String name)
-        {
 
-                TextView userNameView=mView.findViewById(R.id.user_single_name);
+        public void setName(String name) {
+
+            TextView userNameView = mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);
         }
-        public void setUserImage(String image, Context context)
-        {
-            CircleImageView userimage=mView.findViewById(R.id.user_single_image);
+
+        public void setUserImage(String image, Context context) {
+            CircleImageView userimage = mView.findViewById(R.id.user_single_image);
             Picasso.with(context).load(image).placeholder(R.drawable.ic_account_circle_black_24dp).into(userimage);
 
         }
-       public void setUserOnline(String online_status)
-       {
-           ImageView userOnline=mView.findViewById(R.id.img_online);
-           if(online_status.equals("true"))
-           {
-               userOnline.setVisibility(View.VISIBLE);
-           }
-           else
-           {
-               userOnline.setVisibility(View.INVISIBLE);
-           }
+
+        public void setUserOnline(String online_status) {
+            ImageView userOnline = mView.findViewById(R.id.img_online);
+            if (online_status.equals("true")) {
+                userOnline.setVisibility(View.VISIBLE);
+            } else {
+                userOnline.setVisibility(View.INVISIBLE);
+            }
 
 
-       }
+        }
     }
 }

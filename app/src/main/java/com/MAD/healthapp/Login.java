@@ -97,7 +97,6 @@ public class Login extends AppCompatActivity {
         });
 
 
-
         findViewById(R.id.btn_newAccount).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

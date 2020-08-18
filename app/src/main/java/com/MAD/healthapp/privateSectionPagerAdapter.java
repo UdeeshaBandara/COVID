@@ -13,19 +13,18 @@ class privateSectionPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch(position){
+        switch (position) {
             case 0:
-                FriendsFragment friendsFragment1=new FriendsFragment();
-                return  friendsFragment1;
+                FriendsFragment friendsFragment1 = new FriendsFragment();
+                return friendsFragment1;
             case 1:
-                FriendsFragment friendsFragment2=new FriendsFragment();
-                return  friendsFragment2;
+                FriendsFragment friendsFragment2 = new FriendsFragment();
+                return friendsFragment2;
             case 2:
-                FriendsFragment friendsFragment=new FriendsFragment();
-                return  friendsFragment;
+                FriendsFragment friendsFragment = new FriendsFragment();
+                return friendsFragment;
             default:
                 return null;
-
 
 
         }
@@ -36,21 +35,20 @@ class privateSectionPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 3;
     }
-    public CharSequence getPageTitle(int position)
-    {
-        switch(position){
+
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
             case 0:
 
-                return  "Requests";
+                return "Requests";
             case 1:
 
-                return  "Chats";
+                return "Chats";
             case 2:
 
-                return  "Friends";
+                return "Friends";
             default:
                 return null;
-
 
 
         }

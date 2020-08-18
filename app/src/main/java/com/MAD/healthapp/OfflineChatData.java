@@ -15,33 +15,37 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 public class OfflineChatData extends Application {
-private DatabaseReference mUserDatabase;
-private FirebaseAuth mAuth;
+    private DatabaseReference mUserDatabase;
+    private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+
     @Override
     public void onCreate() {
         super.onCreate();
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         FirebaseApp.initializeApp(this);
-        mAuth=FirebaseAuth.getInstance();;
-        currentUser= mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        ;
+        currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
 
-              mUserDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-       mUserDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-              if(dataSnapshot!=null)  { mUserDatabase.child("online").onDisconnect().setValue(ServerValue.TIMESTAMP);
+            mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            mUserDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot != null) {
+                        mUserDatabase.child("online").onDisconnect().setValue(ServerValue.TIMESTAMP);
 
 
-              }
-            }
+                    }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
         }
-}}
+    }
+}

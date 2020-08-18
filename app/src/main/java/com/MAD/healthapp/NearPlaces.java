@@ -22,13 +22,13 @@ public class NearPlaces extends AsyncTask {
     protected Object doInBackground(Object[] objects) {
 
 
-        googleMap =(GoogleMap)objects[0];
-        url=(String) objects[1];
-        Log.e("sds",url);
+        googleMap = (GoogleMap) objects[0];
+        url = (String) objects[1];
+        Log.e("sds", url);
 
-        GetUrl geturl=new GetUrl();
-        try{
-            googlePlaces=geturl.readURL(url);
+        GetUrl geturl = new GetUrl();
+        try {
+            googlePlaces = geturl.readURL(url);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,23 +39,23 @@ public class NearPlaces extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         try {
-            JSONObject object=new JSONObject();
-            JSONArray arr=object.getJSONArray("results");
+            JSONObject object = new JSONObject();
+            JSONArray arr = object.getJSONArray("results");
 
-            for(int i= 0; i<arr.length();i++){
+            for (int i = 0; i < arr.length(); i++) {
 
-                JSONObject jsonObject=arr.getJSONObject(i);
+                JSONObject jsonObject = arr.getJSONObject(i);
                 JSONObject locationObj = jsonObject.getJSONObject("geometry").getJSONObject("location");
 
-                String latitude=locationObj.getString("lat");
-                String logitude= locationObj.getString("lng");
+                String latitude = locationObj.getString("lat");
+                String logitude = locationObj.getString("lng");
 
-                JSONObject nameObj=arr.getJSONObject(i);
-                String name=nameObj.getString("name");
+                JSONObject nameObj = arr.getJSONObject(i);
+                String name = nameObj.getString("name");
 
-                LatLng latlng=new LatLng(Double.parseDouble(latitude),Double.parseDouble(logitude));
+                LatLng latlng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(logitude));
 
-                MarkerOptions markerOptions=new MarkerOptions();
+                MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title(name);
                 markerOptions.position(latlng);
 
@@ -64,7 +64,7 @@ public class NearPlaces extends AsyncTask {
 
             }
 
-        }catch (JSONException e){
+        } catch (JSONException e) {
 
             e.printStackTrace();
         }

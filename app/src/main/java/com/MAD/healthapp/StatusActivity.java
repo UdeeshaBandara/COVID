@@ -26,39 +26,35 @@ public class StatusActivity extends AppCompatActivity {
     private DatabaseReference statusRef;
     private FirebaseUser firebaseUser;
     private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
 
-        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        txt_newStatus=findViewById(R.id.txt_newStatus);
+        txt_newStatus = findViewById(R.id.txt_newStatus);
         txt_newStatus.setText(getIntent().getStringExtra("oldStat"));
-        btn_updateStatus=findViewById(R.id.btn_updateStatus);
-        statusRef= FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid());
-
-
+        btn_updateStatus = findViewById(R.id.btn_updateStatus);
+        statusRef = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid());
 
 
         btn_updateStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog=new ProgressDialog(StatusActivity.this);
+                progressDialog = new ProgressDialog(StatusActivity.this);
                 progressDialog.setTitle("Saving Changes");
                 progressDialog.setMessage("Please wait Updating Status");
                 progressDialog.show();
                 statusRef.child("Status").setValue(txt_newStatus.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             progressDialog.dismiss();
-                        }
-                        else
-                        {
-                            Toast.makeText(getApplicationContext(),"There is a error!",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "There is a error!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

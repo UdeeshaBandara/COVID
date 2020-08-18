@@ -87,29 +87,28 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         listPoints = new ArrayList<>();
         View view = findViewById(R.id.nested_linear);
-        txt_hospitals=view.findViewById(R.id.txt_hospitals);
+        txt_hospitals = view.findViewById(R.id.txt_hospitals);
 
-      txt_hospitals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        txt_hospitals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if(!hospitalsWithLan[0][0].isEmpty())
-                {
-                for (int d = 0; d < hospitalsWithLan[0].length; d++) {
-                    if (parent.getItemAtPosition(position).equals(hospitalsWithLan[0][d])) {
-                        mMap.clear();
-                        mMap.addMarker(markerOptions);
-                        String[] latlong =  hospitalsWithLan[1][d].split(",");
-                        double lat=Double.parseDouble(latlong[0]);
-                        double lng=Double.parseDouble(latlong[1]);
-                        LatLng location = new LatLng(lat, lng);
-                        String url = getRequestUrl(location, listPoints.get(0));
+                if (!hospitalsWithLan[0][0].isEmpty()) {
+                    for (int d = 0; d < hospitalsWithLan[0].length; d++) {
+                        if (parent.getItemAtPosition(position).equals(hospitalsWithLan[0][d])) {
+                            mMap.clear();
+                            mMap.addMarker(markerOptions);
+                            String[] latlong = hospitalsWithLan[1][d].split(",");
+                            double lat = Double.parseDouble(latlong[0]);
+                            double lng = Double.parseDouble(latlong[1]);
+                            LatLng location = new LatLng(lat, lng);
+                            String url = getRequestUrl(location, listPoints.get(0));
 
-                        TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
-                        taskRequestDirections.execute(url);
+                            TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
+                            taskRequestDirections.execute(url);
+
+                        }
 
                     }
-
-                }
                 }
             }
 
@@ -120,9 +119,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
         });
 
 
-
     }
-
 
 
     @Override
@@ -153,9 +150,8 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                 //Add first marker to the map
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 mMap.addMarker(markerOptions);
-                current_position=listPoints.get(0);
+                current_position = listPoints.get(0);
                 searchNearBy();
-
 
 
             }
@@ -164,11 +160,10 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void searchNearBy()
-    {
+    private void searchNearBy() {
         String mLatLong = current_position.latitude + "," + current_position.longitude;
-        String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+mLatLong+"&radius=5000&types=hospital&key=AIzaSyAPrTPADT_tYmMJYjg6nZZ4jUHLJILoWpM";
-       Log.e("lat",mLatLong);
+        String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + mLatLong + "&radius=5000&types=hospital&key=AIzaSyAPrTPADT_tYmMJYjg6nZZ4jUHLJILoWpM";
+        Log.e("lat", mLatLong);
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -177,21 +172,23 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                 try {
 
                     JSONObject hospital = new JSONObject(response);
-                   hospitalsWithLan= new String[2][hospital.length()];
+                    hospitalsWithLan = new String[2][hospital.getJSONArray("results").length()];
 
-                     for (int i = 0; i < hospital.length(); i++) {
-                     //    if(!hospital.getJSONArray("results").getJSONObject(i).getString("name").contains("Best")){
-                        hospitalsWithLan[1][i] = hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lat")+","+
-                        hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lng");
-                        hospitalsWithLan[0][i] = hospital.getJSONArray("results").getJSONObject(i).getString("name");}
+                    for (int i = 0; i < hospital.getJSONArray("results").length(); i++) {
 
-                    //}
+                        hospitalsWithLan[1][i] = hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lat") + "," +
+                                hospital.getJSONArray("results").getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lng");
+                        hospitalsWithLan[0][i] = hospital.getJSONArray("results").getJSONObject(i).getString("name");
+                        Log.e("Hospitals", hospitalsWithLan[0][i]);
+                    }
 
 
+                    Log.e("No of Hospitals", String.valueOf(hospital.getJSONArray("results").length()));
 
-                 ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(mapFragment.getActivity(),android.R.layout.simple_list_item_1,hospitalsWithLan[0]);
-                   Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                  txt_hospitals.setAdapter(Adaptor);
+
+                    ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(mapFragment.getActivity(), android.R.layout.simple_list_item_1, hospitalsWithLan[0]);
+                    Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    txt_hospitals.setAdapter(Adaptor);
 
 
                 } catch (Exception ex) {
@@ -213,16 +210,16 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
 
     private String getRequestUrl(LatLng origin, LatLng dest) {
         //Value of origin
-        String str_org = "origin=" + origin.latitude +","+origin.longitude;
+        String str_org = "origin=" + origin.latitude + "," + origin.longitude;
         //Value of destination
-        String str_dest = "destination=" + dest.latitude+","+dest.longitude;
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
         //Set value enable the sensor
         String sensor = "sensor=false";
         //Mode for find direction
         String mode = "mode=driving";
         //Build the full param
-        String key="key=AIzaSyAPrTPADT_tYmMJYjg6nZZ4jUHLJILoWpM";
-        String param = str_org +"&" + str_dest + "&" +sensor+"&" +mode+"&"+key;
+        String key = "key=AIzaSyAPrTPADT_tYmMJYjg6nZZ4jUHLJILoWpM";
+        String param = str_org + "&" + str_dest + "&" + sensor + "&" + mode + "&" + key;
         //Output format
         String output = "json";
         //Create url to request
@@ -235,7 +232,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
         String responseString = "";
         InputStream inputStream = null;
         HttpURLConnection httpURLConnection = null;
-        try{
+        try {
             URL url = new URL(reqUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.connect();
@@ -269,7 +266,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
     @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
+        switch (requestCode) {
             case LOCATION_REQUEST:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     mMap.setMyLocationEnabled(true);
@@ -288,7 +285,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return  responseString;
+            return responseString;
         }
 
         @Override
@@ -300,7 +297,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>> > {
+    public class TaskParser extends AsyncTask<String, Void, List<List<HashMap<String, String>>>> {
 
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... strings) {
@@ -334,7 +331,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                     double lat = Double.parseDouble(point.get("lat"));
                     double lon = Double.parseDouble(point.get("lon"));
 
-                    points.add(new LatLng(lat,lon));
+                    points.add(new LatLng(lat, lon));
                 }
 
                 polylineOptions.addAll(points);
@@ -343,7 +340,7 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
                 polylineOptions.geodesic(true);
             }
 
-            if (polylineOptions!=null) {
+            if (polylineOptions != null) {
 
                 mMap.addPolyline(polylineOptions);
 

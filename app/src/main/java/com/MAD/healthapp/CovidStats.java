@@ -60,7 +60,7 @@ public class CovidStats extends Fragment {
     ArrayList<BarEntry> lastTenDailyCases = new ArrayList<>();
     ArrayList<Entry> lastTenDailyDeaths = new ArrayList<>();
 
-String na="";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,13 +69,13 @@ String na="";
 
         pieChart = v.findViewById(R.id.SumChart);
         barChart = v.findViewById(R.id.dailyBarChart);
-        lineChart= v.findViewById(R.id.lineChart);
+        lineChart = v.findViewById(R.id.lineChart);
         txt_countries = v.findViewById(R.id.txt_countries);
         pieChart.getDescription().setEnabled(false);
         barChart.getDescription().setEnabled(false);
         lineChart.getDescription().setEnabled(false);
 //        lineChart.setOnChartGestureListener((OnChartGestureListener) v.getContext());
-  //      lineChart.setOnChartValueSelectedListener((OnChartValueSelectedListener) v.getContext());
+        //      lineChart.setOnChartValueSelectedListener((OnChartValueSelectedListener) v.getContext());
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(false);
 
@@ -147,11 +147,11 @@ String na="";
 
 
     private void addLineDataSet() {
-        LineDataSet rec= new LineDataSet(lastTenDailyDeaths,"Deaths");
+        LineDataSet rec = new LineDataSet(lastTenDailyDeaths, "Deaths");
         rec.setFillAlpha(110);
-        ArrayList<ILineDataSet>dataSets=new ArrayList<>();
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(rec);
-        LineData data= new LineData(dataSets);
+        LineData data = new LineData(dataSets);
         lineChart.setData(data);
 
     }

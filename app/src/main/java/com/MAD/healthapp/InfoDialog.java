@@ -15,14 +15,14 @@ public class InfoDialog extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Information").setMessage("Patient Details Informed.Do you want to call ambulance?").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:"+String.valueOf(1990)));
-                    startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + String.valueOf(1990)));
+                startActivity(intent);
 
 
             }
@@ -32,6 +32,6 @@ public class InfoDialog extends AppCompatDialogFragment {
 
             }
         });
-    return builder.create();
+        return builder.create();
     }
 }

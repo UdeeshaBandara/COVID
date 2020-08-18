@@ -95,10 +95,8 @@ public class ReportFragment extends Fragment {
                                 }
                             });
 
-                }
-                else
-                {
-                    Toast.makeText(getContext(),"Please enter all information",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Please enter all information", Toast.LENGTH_SHORT).show();
 
                 }
             }

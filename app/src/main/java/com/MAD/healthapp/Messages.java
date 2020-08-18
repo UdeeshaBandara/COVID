@@ -1,7 +1,7 @@
 package com.MAD.healthapp;
 
 public class Messages {
-    private String message,type,from;
+    private String message, type, from;
     private long time;
     private boolean seen;
 
@@ -55,7 +55,6 @@ public class Messages {
     public void setSeen(boolean seen) {
         this.seen = seen;
     }
-
 
 
 }

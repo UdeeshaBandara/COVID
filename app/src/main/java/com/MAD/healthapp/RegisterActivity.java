@@ -25,8 +25,8 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText txt_name, txt_email, txt_password,txt_reEnter;
-    private Button btn_register,btn_back;
+    private EditText txt_name, txt_email, txt_password, txt_reEnter;
+    private Button btn_register, btn_back;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
     private DatabaseReference firebaseDatabase;
@@ -39,14 +39,14 @@ public class RegisterActivity extends AppCompatActivity {
         txt_email = findViewById(R.id.txt_email);
         txt_password = findViewById(R.id.txt_password);
         btn_register = findViewById(R.id.btn_register);
-        txt_reEnter=findViewById(R.id.txt_reEnter);
-        btn_back=findViewById(R.id.btn_back);
+        txt_reEnter = findViewById(R.id.txt_reEnter);
+        btn_back = findViewById(R.id.btn_back);
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(txt_name.getText()) && !TextUtils.isEmpty(txt_email.getText()) && !TextUtils.isEmpty(txt_password.getText())&&!TextUtils.isEmpty(txt_reEnter.getText())) {
+                if (!TextUtils.isEmpty(txt_name.getText()) && !TextUtils.isEmpty(txt_email.getText()) && !TextUtils.isEmpty(txt_password.getText()) && !TextUtils.isEmpty(txt_reEnter.getText())) {
                     progressDialog.setTitle("Registration Process");
                     progressDialog.setMessage("Please Wait!");
                     progressDialog.show();
@@ -54,14 +54,14 @@ public class RegisterActivity extends AppCompatActivity {
                     register_user(txt_name.getText().toString(), txt_email.getText().toString(), txt_password.getText().toString());
                 } else {
 
-                        Toast.makeText(getApplicationContext(),"Enter data correctly",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter data correctly", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 finish();
             }
         });
@@ -74,24 +74,23 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
-                            String Uid=currentUser.getUid();
-                            firebaseDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(Uid);
-                            HashMap<String,String>userMap=new HashMap<>();
-                            userMap.put("Name",txt_name.getText().toString());
-                            userMap.put("Status","Hi there! I'm using COVID-App");
-                            userMap.put("Image","Default");
-                            userMap.put("thumb_image","Default");
+                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                            String Uid = currentUser.getUid();
+                            firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(Uid);
+                            HashMap<String, String> userMap = new HashMap<>();
+                            userMap.put("Name", txt_name.getText().toString());
+                            userMap.put("Status", "Hi there! I'm using COVID-App");
+                            userMap.put("Image", "Default");
+                            userMap.put("thumb_image", "Default");
                             firebaseDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                    {
+                                    if (task.isSuccessful()) {
 
                                         progressDialog.dismiss();
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Intent startIntent = new Intent(RegisterActivity.this, MainActivity.class);
-                                        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(startIntent);
                                         finish();
 

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar tolbar = findViewById(R.id.toolbar);
         setSupportActionBar(tolbar);
         currentUser = mAuth.getCurrentUser();
-        if(currentUser!=null) {
+        if (currentUser != null) {
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         }
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -62,9 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent startIntent = new Intent(MainActivity.this, Login.class);
             startActivity(startIntent);
             finish();
-        }
-        else
-        {
+        } else {
             mUserRef.child("online").setValue("true");
 
         }
@@ -74,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStop() {
         super.onStop();
 
-        if(currentUser!=null){
-        mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+        if (currentUser != null) {
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
         }
     }
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MsgFragment()).commit();
                 break;
             case R.id.nav_map:
-                Intent intent=new Intent(this,NavHospitals.class);
+                Intent intent = new Intent(this, NavHospitals.class);
                 startActivity(intent);
                 break;
             case R.id.nav_mail:
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
+                        switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 FirebaseAuth.getInstance().signOut();
                                 onStart();
@@ -112,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
                 };
-
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -135,13 +133,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Call us \t 0774\t78\t79\t79", Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_share:
-                Intent in=new Intent(Intent.ACTION_SEND);
+                Intent in = new Intent(Intent.ACTION_SEND);
                 in.setType("text/Plain");
-                String shareBody="E:\\Note\\Notes\\MAD\\HealthApp\\app\\build\\outputs\\apk\\debug";
-                String shareSub="Hi, Do you like to get newest information about COVID-19";
-                in.putExtra(Intent.EXTRA_SUBJECT,shareBody);
-                in.putExtra(Intent.EXTRA_TEXT,shareSub);
-                startActivity(in.createChooser(in,"shareUsing"));
+                String shareBody = "E:\\Note\\Notes\\MAD\\HealthApp\\app\\build\\outputs\\apk\\debug";
+                String shareSub = "Hi, Do you like to get newest information about COVID-19";
+                in.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+                in.putExtra(Intent.EXTRA_TEXT, shareSub);
+                startActivity(in.createChooser(in, "shareUsing"));
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

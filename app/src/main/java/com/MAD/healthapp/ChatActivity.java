@@ -46,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText chat_message_view;
     private SwipeRefreshLayout mRefreshLayout;
     private DatabaseReference mRootRef;
-    private  DatabaseReference mUserRef;
+    private DatabaseReference mUserRef;
     private RecyclerView mMessageList;
     private final List<Messages> messagesList = new ArrayList<>();
     private LinearLayoutManager mLinearLayout;
