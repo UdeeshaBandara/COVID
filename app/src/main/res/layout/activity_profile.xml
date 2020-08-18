@@ -66,8 +66,8 @@
         android:id="@+id/btn_frndRequest"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="262dp"
         android:background="@drawable/background_ok"
         android:text="Send Friend Request" />
 

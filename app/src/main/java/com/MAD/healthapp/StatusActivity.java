@@ -40,7 +40,7 @@ public class StatusActivity extends AppCompatActivity {
         btn_updateStatus = findViewById(R.id.btn_updateStatus);
         statusRef = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid());
 
-
+        //change status when user click the button
         btn_updateStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

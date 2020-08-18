@@ -62,15 +62,17 @@ public class ChatActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUserRef.child("online").setValue("true");
+        //get user id of receiver from firendsfragment
         mChatUser = getIntent().getStringExtra("userid");
-
+        //get user name of receiver from firendsfragment
         String chat_user_name = getIntent().getStringExtra("user_name");
-
+        //customized action bar for chat interface
         ActionBar actionBar = getSupportActionBar();
 
         mCurrentUserId = mAuth.getCurrentUser().getUid();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
+
         mRootRef = FirebaseDatabase.getInstance().getReference();
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View action = inflater.inflate(R.layout.chat_custom_bar, null);
@@ -81,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
         mLastSeenView = findViewById(R.id.custom_bar_seen);
         mProfileImage = findViewById(R.id.custom_bar_image);
         chat_send_btn = findViewById(R.id.chat_send_btn);
+        //newly typed edit text
         chat_message_view = findViewById(R.id.chat_message_view);
         mAdapter = new MessageAdapter(this, messagesList);
         mMessageList = findViewById(R.id.messeges_list);
@@ -90,7 +93,9 @@ public class ChatActivity extends AppCompatActivity {
         mMessageList.setLayoutManager(mLinearLayout);
         mMessageList.setAdapter(mAdapter);
         loadMessages();
+        //set user name of receiver to action bar
         mTitleView.setText(chat_user_name);
+        //Listener for last seen
         mRootRef.child("Users").child(mChatUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -112,7 +117,7 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-
+        // keep listening to msg seen
         mRootRef.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -146,6 +151,7 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+        //listener to send new msgs to db
         chat_send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +159,7 @@ public class ChatActivity extends AppCompatActivity {
                 Log.e("butn", "btn");
             }
         });
+        //Load previous msgs when user refresh the layout
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -163,17 +170,27 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+    }
+
     @Override
     protected void onStart() {
 
         super.onStart();
+        mUserRef.child("online").setValue("true");
 
 
     }
 
     private void loadMessages() {
+        //Reference location to user msgs
         DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);
         Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_TO_LOAD);
+        //Refresh recycle view with the newly sent msgs
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -205,12 +222,13 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-
+    //send new msg to db
     private void sendMessage() {
         String message = chat_message_view.getText().toString();
         if (!TextUtils.isEmpty(message)) {
             String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;
             String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;
+            //
             DatabaseReference user_message_push = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser).push();
             String push_id = user_message_push.getKey();
             Map messageMap = new HashMap();
@@ -228,7 +246,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        Log.e("sa", "asa");
+                        Log.e("Error", "Db");
                     }
                 }
             });

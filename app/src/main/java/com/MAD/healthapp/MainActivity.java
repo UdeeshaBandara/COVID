@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    private DatabaseReference mUserRef;
+    public static DatabaseReference mUserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +36,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar tolbar = findViewById(R.id.toolbar);
         setSupportActionBar(tolbar);
         currentUser = mAuth.getCurrentUser();
+        //Check and get current firebase user id
         if (currentUser != null) {
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         }
         drawerLayout = findViewById(R.id.drawer_layout);
+       // add and override action listener for the navigation drawer
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, tolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_open);
-
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        //Check whether there is a fragment attached or not if not attach stats fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CovidStats()).commit();
             navigationView.setCheckedItem(R.id.nav_stat);
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
     }
-
+    //override the navigation  listener method
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReportFragment()).commit();
                 break;
             case R.id.nav_logout:
+                //user log out
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -145,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    //close navigator when press the back button
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

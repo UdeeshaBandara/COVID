@@ -64,7 +64,7 @@ public class Login extends AppCompatActivity {
 
                 LoginManager.getInstance().logInWithReadPermissions(
                         Login.this,
-                        Arrays.asList("email", "public_profile"));
+                        Arrays.asList("email", "public_profile"));//get email read permission from fb
                 loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
@@ -111,12 +111,13 @@ public class Login extends AppCompatActivity {
 
                 String email = txt_email.getText().toString();
                 String password = txt_password.getText().toString();
-                if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
+                if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {//input validation
+                   //Display process dialog
                     progressDialog.setTitle("Logged In");
                     progressDialog.setMessage("Please Wait!");
                     progressDialog.setCanceledOnTouchOutside(false);
-
                     progressDialog.show();
+                    //calling Firebase in-build authentication method
                     loginUser(email, password);
                 } else {
                     Toast.makeText(Login.this, "Enter Login Details",
@@ -132,6 +133,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //Check whether if user is login or not
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
 
@@ -141,28 +143,28 @@ public class Login extends AppCompatActivity {
         }
 
     }
-
+    //Pre-defined Firebase email and password authenticate method
     private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
+                    //Load main activity if user validated
                     Intent startIntent = new Intent(Login.this, MainActivity.class);
                     startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(startIntent);
                     finish();
                 } else {
-
-
                     progressDialog.dismiss();
+                    //Display error msg
                     Toast.makeText(Login.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
+    //Manage fb access token which is used to identify user login via third party entry points
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -196,7 +198,7 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            // FirebaseUser user = mAuth.getCurrentUser();
+
                             progressDialog.dismiss();
                             Intent startIntent = new Intent(Login.this, MainActivity.class);
                             startIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -46,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //validate user inputs
                 if (!TextUtils.isEmpty(txt_name.getText()) && !TextUtils.isEmpty(txt_email.getText()) && !TextUtils.isEmpty(txt_password.getText()) && !TextUtils.isEmpty(txt_reEnter.getText())) {
                     progressDialog.setTitle("Registration Process");
                     progressDialog.setMessage("Please Wait!");
@@ -67,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-
+    //use Firebase in-build method to create new user
     private void register_user(String toString, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

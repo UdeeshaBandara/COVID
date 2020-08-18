@@ -59,7 +59,8 @@
             android:label="@string/title_activity_nav_hospitals"></activity>
         <activity
             android:name="com.MAD.healthapp.ChatActivity"
-            android:theme="@style/AppTheme.New" />
+            android:theme="@style/AppTheme.New"  android:parentActivityName="com.MAD.healthapp.ChatActivity" />
+
         <activity
             android:name="com.MAD.healthapp.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />

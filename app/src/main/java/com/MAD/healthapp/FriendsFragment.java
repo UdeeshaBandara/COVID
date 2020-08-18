@@ -55,7 +55,7 @@ public class FriendsFragment extends Fragment {
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        mFriendsList.setHasFixedSize(true);
+        mFriendsList.setHasFixedSize(true);//recycler's size is fixed and is not affected by the adapter contents
         mFriendsList.setLayoutManager(new LinearLayoutManager(getContext()));
         return mMainView;
     }
@@ -66,16 +66,17 @@ public class FriendsFragment extends Fragment {
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUserRef.child("online").setValue("true");
         FirebaseRecyclerAdapter<Friends, FriendsViewHolder> friendsRecyclerViewAdapter = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(
-                Friends.class,
-                R.layout.users_single_layout,
-                FriendsViewHolder.class,
-                mFriendsDatabase
+                Friends.class,//model class
+                R.layout.users_single_layout,//interface of each row
+                FriendsViewHolder.class,//holds the View of the each row
+                mFriendsDatabase//db query to retrieve data
 
-        ) {
+        ) {//Update the ViewHolder contents with the item at the given position
             @Override
             protected void populateViewHolder(FriendsViewHolder friendsViewHolder, Friends friends, int i) {
                 friendsViewHolder.setDate(friends.getDate());
                 String list_user_id = getRef(i).getKey();
+                //keep listening if user is online or not, if user came online turn on visibility of the online icon
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,7 +91,7 @@ public class FriendsFragment extends Fragment {
                         friendsViewHolder.setName(userName);
 
                         friendsViewHolder.setUserImage(userImage, getContext());
-
+                        //listening for chat activity
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

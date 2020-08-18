@@ -70,6 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+        //listener for calling status changing activity
         findViewById(R.id.btn_changeStatus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +79,7 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(statusIn);
             }
         });
+        //listener for calling image changing dialog
         findViewById(R.id.btn_changeImage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +100,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
             Uri imgURL = data.getData();
+            //set aspect ratio of image
             CropImage.activity(imgURL).setAspectRatio(1, 1).start(this);
 
 

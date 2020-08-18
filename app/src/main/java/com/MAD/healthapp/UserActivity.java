@@ -50,9 +50,17 @@ public class UserActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mUserRef.child("online").setValue(true);
-        FirebaseRecyclerAdapter<Users, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UserViewHolder>(Users.class, R.layout.users_single_layout, UserViewHolder.class, mUsersDatabase) {
+        FirebaseRecyclerAdapter<Users, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UserViewHolder>(
+                Users.class, //model class
+                R.layout.users_single_layout, //view format of each row
+                UserViewHolder.class, //class that hold the data
+                mUsersDatabase//database reference to data
+                 ) {
+
+            //get data form model class and set to holder
             @Override
             protected void populateViewHolder(UserViewHolder userViewHolder, Users users, int i) {
+
                 userViewHolder.setDisplayName(users.getName());
                 userViewHolder.setUserStatus(users.getStatus());
                 userViewHolder.setImage(users.getImage(), getApplicationContext());

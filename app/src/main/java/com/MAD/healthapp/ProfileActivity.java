@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
                 txt_profileStatus.setText(status);
                 Picasso.with(ProfileActivity.this).load(image).into(pro_pic);
 
-
+                //update request button accordingly
                 mFriendRequest.child(mCurrentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

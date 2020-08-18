@@ -27,7 +27,7 @@ import java.util.Map;
 import static com.android.volley.VolleyLog.TAG;
 
 public class ReportFragment extends Fragment {
-    Button btn_report, cancel;
+
     TextView txt_name, txt_age, txt_tel, txt_add;
     CheckBox chk_fever, chk_tiredness, chk_soreThroat, chk_cough, chk_aches, chk_headache;
 
@@ -58,7 +58,7 @@ public class ReportFragment extends Fragment {
                     patient.put("Address", txt_add.getText().toString());
                     patient.put("Age", txt_age.getText().toString());
                     patient.put("Tel", txt_tel.getText().toString());
-
+                    //Checking symptoms with ternary operator
                     patient.put("aches", chk_aches.isChecked() ? "Yes" : "No");
                     patient.put("cough", chk_cough.isChecked() ? "Yes" : "No");
                     patient.put("fever", chk_fever.isChecked() ? "Yes" : "No");
@@ -73,16 +73,16 @@ public class ReportFragment extends Fragment {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     openDialog();
-                                    chk_aches.setSelected(false);
+                                    chk_aches.setChecked(false);
                                     txt_add.setText("");
-                                    chk_cough.setSelected(false);
+                                    chk_cough.setChecked(false);
                                     txt_age.setText("");
-                                    chk_fever.setSelected(false);
+                                    chk_fever.setChecked(false);
                                     txt_name.setText("");
-                                    chk_headache.setSelected(false);
+                                    chk_headache.setChecked(false);
                                     txt_tel.setText("");
-                                    chk_tiredness.setSelected(false);
-                                    chk_soreThroat.setSelected(false);
+                                    chk_tiredness.setChecked(false);
+                                    chk_soreThroat.setChecked(false);
 
                                 }
 
