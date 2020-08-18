@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -88,7 +90,17 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
         listPoints = new ArrayList<>();
         View view = findViewById(R.id.nested_linear);
         txt_hospitals = view.findViewById(R.id.txt_hospitals);
-
+        AlertDialog.Builder builder= new AlertDialog.Builder(mapFragment.getActivity());
+        builder.setCancelable(true);
+        builder.setTitle("Alert");
+        builder.setMessage("Press and hold required location on map to get nearest hospitals");
+        builder.setNegativeButton("Got It", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+            builder.show();
         txt_hospitals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

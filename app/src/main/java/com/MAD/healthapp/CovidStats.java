@@ -88,22 +88,34 @@ public class CovidStats extends Fragment {
         pDialog.show();
         getSum("Sri Lanka");
         getDailyUpdate("sri-lanka");
-
-        String url = "https://api.covid19api.com/countries";
+        // String api2="https://covid-api.com/api/regions";
+        String api1 = "https://api.covid19api.com/countries";
         RequestQueue queue = Volley.newRequestQueue(v.getContext());
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, api1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
 
+                    // for 1st API
                     JSONArray covidStats = new JSONArray(response);
 
                     for (int i = 0; i < covidStats.length(); i++) {
+
                         countries[0][i] = covidStats.getJSONObject(i).getString("Country");
                         countries[1][i] = covidStats.getJSONObject(i).getString("Slug");
 
+
                     }
+
+                    /*for 2nd API
+                    JSONObject covidStats = new JSONObject(response);
+                    JSONArray ar=covidStats.getJSONArray("data");
+                    Log.e("array",String.valueOf(covidStats.getJSONArray("data").getJSONObject(1).getString("name")));
+                    for (int i = 0; i < covidStats.getJSONArray("data").length(); i++){
+
+                        countries[0][i] =ar.getJSONObject(i).getString("name");
+                    }*/
                     ArrayAdapter<String> Adaptor = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, countries[0]);
                     Adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     txt_countries.setAdapter(Adaptor);
@@ -158,7 +170,9 @@ public class CovidStats extends Fragment {
 
     private void getDailyUpdate(final String s) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        StringRequest requestSum = new StringRequest(Request.Method.GET, "https://api.covid19api.com/total/country/" + s + "", new Response.Listener<String>() {
+        String api_1st = "https://api.covid19api.com/total/country/" + s + "";
+
+        StringRequest requestSum = new StringRequest(Request.Method.GET, api_1st, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -224,12 +238,15 @@ public class CovidStats extends Fragment {
 
     private void getSum(final String country) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        StringRequest requestSum = new StringRequest(Request.Method.GET, "https://api.covid19api.com/summary", new Response.Listener<String>() {
+        String api_1st = "https://api.covid19api.com/summary";
+        String api_2nd = "https://covid-api.com/api/reports?region_name=" + country + "";
+        StringRequest requestSum = new StringRequest(Request.Method.GET, api_1st, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
 
+                    //for 1st API
                     JSONObject covidStats1 = new JSONObject(response);
                     JSONArray countryArray1 = covidStats1.getJSONArray("Countries");
                     for (int c = 0; c < countryArray1.length(); c++) {
@@ -242,6 +259,13 @@ public class CovidStats extends Fragment {
                         }
 
                     }
+                  /*for 2nd API
+                    JSONObject covidStats1 = new JSONObject(response);
+                    values[2]=Integer.parseInt(covidStats1.getJSONArray("data").getJSONObject(0).getString("deaths"));
+                   values[1]= Integer.parseInt(covidStats1.getJSONArray("data").getJSONObject(0).getString("recovered"));
+                   values[0]= Integer.parseInt(covidStats1.getJSONArray("data").getJSONObject(0).getString("confirmed"))-(values[1]+values[2]);
+*/
+
                     chart(country);
                 } catch (Exception ex) {
 
