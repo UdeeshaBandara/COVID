@@ -117,6 +117,7 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
         // keep listening to msg seen
         mRootRef.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -174,14 +175,14 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
     }
 
     @Override
     protected void onStart() {
 
         super.onStart();
-        mUserRef.child("online").setValue("true");
+
 
 
     }

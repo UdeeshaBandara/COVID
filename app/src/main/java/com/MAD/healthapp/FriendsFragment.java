@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -63,8 +64,8 @@ public class FriendsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        mUserRef.child("online").setValue("true");
+        //mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+
         FirebaseRecyclerAdapter<Friends, FriendsViewHolder> friendsRecyclerViewAdapter = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(
                 Friends.class,//model class
                 R.layout.users_single_layout,//interface of each row
@@ -129,6 +130,12 @@ public class FriendsFragment extends Fragment {
             }
         };
         mFriendsList.setAdapter(friendsRecyclerViewAdapter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
     }
 
     public static class FriendsViewHolder extends RecyclerView.ViewHolder {

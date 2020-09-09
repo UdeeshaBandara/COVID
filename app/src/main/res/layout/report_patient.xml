@@ -1,240 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout1"
     android:layout_width="match_parent"
-
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="134dp"
         android:layout_height="134dp"
-
-        android:layout_marginStart="312dp"
-
-        android:layout_marginLeft="312dp"
-        android:src="@drawable/circletransparant"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="-70dp"
+        android:layout_marginTop="-40dp"
+        android:src="@drawable/circletransparant" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
         android:layout_width="134dp"
-
+        android:layout_marginTop="-40dp"
         android:layout_height="134dp"
-        android:layout_marginEnd="332dp"
-        android:layout_marginRight="332dp"
-        android:src="@drawable/circletransparant"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="-23dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="-30dp"
+        android:src="@drawable/circletransparant" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/belw"
         android:layout_width="134dp"
         android:layout_height="134dp"
+        android:layout_marginRight="-70dp"
+        android:layout_marginTop="-40dp"
+        android:layout_below="@id/appCompatImageView"
+        android:layout_alignParentRight="true"
 
-        android:layout_marginStart="350dp"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="76dp"
-        android:src="@drawable/circle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/circle" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/symptoms"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_tel" />
+        <LinearLayout
+            android:id="@+id/lyr_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bgHeader"
+            android:layout_alignParentTop="true"
+            android:layout_marginHorizontal="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginRight="80dp"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".6"
+                    android:background="@drawable/custom_input"
+                    android:hint="Patient Name"
+                    android:paddingLeft="15dp" />
+
+                <EditText
+                    android:id="@+id/txt_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".6"
+                    android:background="@drawable/custom_input"
+                    android:hint="Patient Age"
+                    android:inputType="number"
+                    android:paddingLeft="15dp" />
+
+                <EditText
+                    android:id="@+id/txt_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".6"
+                    android:background="@drawable/custom_input"
+                    android:hint="Patient Address"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="15dp" />
+
+                <EditText
+                    android:id="@+id/txt_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".6"
+                    android:background="@drawable/custom_input"
+                    android:hint="Patient Telephone No"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="15dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight=".7"
+                android:text="@string/symptoms"
+                android:textSize="14sp" />
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat2"
-        android:layout_width="414dp"
-        android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1">
+
+                <CheckBox
+                    android:id="@+id/chk_aches"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/achesAndPains"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/chk_tiredness"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/tiredness"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/chk_cough"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/cough"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1">
 
 
-        android:layout_marginTop="56dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_tel">
+                <CheckBox
+                    android:id="@+id/chk_fever"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/fever"
+                    android:textSize="14sp" />
 
-        <CheckBox
-            android:id="@+id/chk_aches"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
-            android:hint="@string/achesAndPains"
-            android:textSize="14sp" />
+                <CheckBox
+                    android:id="@+id/chk_headache"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/headache"
+                    android:textSize="14sp" />
 
-        <CheckBox
-            android:id="@+id/chk_tiredness"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-
-
-            android:hint="@string/tiredness"
-            android:textSize="14sp" />
-
-        <CheckBox
-            android:id="@+id/chk_cough"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:hint="@string/cough"
-            android:textSize="14sp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="412dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
-        app:layout_constraintVertical_bias="0.177">
+                <CheckBox
+                    android:id="@+id/chk_soreThroat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/soreThroat"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
 
-        <CheckBox
-            android:id="@+id/chk_fever"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="4">
 
-            android:layout_marginLeft="22dp"
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
 
-            android:hint="@string/fever"
-            android:textSize="14sp" />
+                    android:layout_weight="1"
+                    android:background="@drawable/background_ok"
+                    android:text="@string/cancel" />
 
-        <CheckBox
-            android:id="@+id/chk_headache"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                <Button
 
-            android:layout_marginLeft="66dp"
-            android:hint="@string/headache"
-            android:textSize="14sp" />
+                    android:id="@+id/btn_report"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background"
+                    android:text="@string/report" />
 
-        <CheckBox
-            android:id="@+id/chk_soreThroat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:hint="@string/soreThroat"
-            android:textSize="14sp" />
-    </LinearLayout>
 
-    <EditText
-        android:id="@+id/txt_age"
-        android:layout_width="240dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
-        android:background="@drawable/custom_input"
-        android:ems="10"
-        android:focusable="true"
-        android:hint="Patient Age"
-        android:inputType="number"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_add" />
+            </LinearLayout>
 
-    <EditText
-        android:id="@+id/txt_name"
-        android:layout_width="240dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
-        android:background="@drawable/custom_input"
-        android:ems="10"
-
-        android:hint="Patient Name"
-        android:inputType="textPersonName"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txt_add"
-        android:layout_width="240dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:ems="10"
-        android:background="@drawable/custom_input"
-        android:hint="Patient Address"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
-
-    <EditText
-        android:id="@+id/txt_tel"
-        android:layout_width="240dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginRight="144dp"
-        android:background="@drawable/custom_input"
-        android:ems="10"
-        android:hint="Patient Telephone No"
-        android:inputType="number"
-        android:maxLength="10"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_age" />
-
-    <Button
-        android:id="@+id/btn_report"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginBottom="92dp"
-        android:background="@drawable/background"
-        android:text="@string/report"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginLeft="112dp"
-        android:layout_marginBottom="92dp"
-        android:background="@drawable/background_ok"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_report" />
+        </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bgHeader"
@@ -242,10 +207,8 @@
         android:layout_height="120dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/header_login"
-        android:elevation="5dp"
         android:rotation="180"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="36dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        />
+</RelativeLayout>
 

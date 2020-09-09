@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -23,8 +25,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.LocationListener;
 
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -83,7 +87,13 @@ public class NavHospitals extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_hospitals);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        LocationManager lmTest=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if( !lmTest.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        {
+            Intent settings=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(settings);
+
+        }// Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
